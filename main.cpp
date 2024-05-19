@@ -5,7 +5,8 @@ using namespace sf;
 
 int main()
 {
-    //танк
+    int Map();
+    //tank
     Vector2f posPlayer;
     Vector2f moveRec;
     Texture texplayer;
@@ -15,7 +16,7 @@ int main()
     player.setPosition(0, 0);
     RenderWindow window(VideoMode(900, 900), "Tanks");
 
-    //иконка
+    //icone
     Image icon;
     icon.loadFromFile("Images/icon.jpg");
     window.setIcon(300, 300, icon.getPixelsPtr());
