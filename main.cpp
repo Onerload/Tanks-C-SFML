@@ -1,4 +1,5 @@
 ﻿#include <SFML/Graphics.hpp>
+#include "Header.h"
 
 using namespace sf;
 
@@ -27,7 +28,7 @@ int main()
     {
         Event event;
         time = clock.getElapsedTime().asMicroseconds();
-        timePlayer = time / 70000;
+        timePlayer = time / 60000;
         clock.restart();
         while (window.pollEvent(event))
         {
@@ -37,21 +38,16 @@ int main()
             {
             case Event::KeyPressed:
                 if (event.key.code == Keyboard::W) moveRec.y = -timePlayer;
-                break;
-                if (event.key.code == Keyboard::A) moveRec.x = -timePlayer;
-                break;
                 if (event.key.code == Keyboard::S) moveRec.y = timePlayer;
-                break;
+                if (event.key.code == Keyboard::A) moveRec.x = -timePlayer;
                 if (event.key.code == Keyboard::D) moveRec.x = timePlayer;
                 break;
             case Event::KeyReleased:
                 if (event.key.code == Keyboard::W) moveRec.y = 0;
-                break;
                 if (event.key.code == Keyboard::S) moveRec.y = 0;
-                break;
                 if (event.key.code == Keyboard::A) moveRec.x = 0;
                 if (event.key.code == Keyboard::D) moveRec.x = 0;
-                break;
+
             default:
                 break;
             }
