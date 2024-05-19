@@ -1,0 +1,3 @@
+﻿  main.cpp
+D:\Проекты\Tanks\main.cpp(29,53): warning C4244: =: преобразование "sf::Int64" в "float", возможна потеря данных
+  Tanks.vcxproj -> D:\Проекты\Tanks\x64\Debug\Tanks.exe
