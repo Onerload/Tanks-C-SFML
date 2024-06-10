@@ -1,5 +1,4 @@
 #pragma once
-
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
@@ -15,4 +14,5 @@ class Map
 
 	Sprite SpaceObject;                   // объект
 	Texture TextureObject;                // текстура объекта
+	Texture tile1;
 };

@@ -1,5 +1,5 @@
-﻿  Map.cpp
-  main.cpp
+﻿  main.cpp
 D:\Проекты\Tanks\main.cpp(31,53): warning C4244: =: преобразование "sf::Int64" в "float", возможна потеря данных
+D:\Проекты\Tanks\main.cpp(68,21): error C2065: tile_1: необъявленный идентификатор
+  Map.cpp
   Создание кода...
-  Tanks.vcxproj -> D:\Проекты\Tanks\x64\Debug\Tanks.exe
