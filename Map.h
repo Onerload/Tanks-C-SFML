@@ -4,15 +4,13 @@ using namespace sf;
 
 class Map
 {
-	Map();   // конструктор
+public:
+	 Map();   // конструктор
 	~Map();  // Деструктор
-
-	void move(float& time);                   // перемещение объекта
 	void draw(RenderWindow& window);          // отрисовка объекта
-	void animation();                         // анимация объекта
 	bool Collision(FloatRect object);       // столкновение с объектом
+protected:
 
-	Sprite SpaceObject;                   // объект
-	Texture TextureObject;                // текстура объекта
-	Texture tile1;
+	Sprite tile_1;                   // объект
+	Texture TextureObject;           // текстура объекта
 };

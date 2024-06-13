@@ -5,7 +5,6 @@ using namespace sf;
 
 int main()
 {
-    int Map();
     //tank
     Vector2f posPlayer;
     Vector2f moveRec;
@@ -65,7 +64,6 @@ int main()
         if ((posPlayer.x < 0) && (posPlayer.y > 848)) player.setPosition(0, 848);
         if ((posPlayer.x < 0) && (posPlayer.y < 50)) player.setPosition(0, 0);
         window.clear();
-        window.draw(tile_1);
         window.draw(player);
         window.display();
     }
