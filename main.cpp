@@ -1,7 +1,8 @@
 ﻿#include <SFML/Graphics.hpp>
-#include "Header.h"
+
 
 using namespace sf;
+
 
 int main()
 {   
@@ -23,14 +24,30 @@ int main()
     float dt;
     Clock dt_clock;
     Texture TexturePlayer;
+    Texture TextureWall;
+    Texture Walls;
 
 
     //player
     const float movementSpeed = 100.f;
     Vector2f velocity;
+
     TexturePlayer.loadFromFile("Images/tank1.png");
     RectangleShape player(Vector2f(52, 52));
     player.setTexture(&TexturePlayer);
+
+
+    //Walls
+    //Wall
+    std::vector<RectangleShape> walls;
+
+    TextureWall.loadFromFile("Images/texture.png");
+    RectangleShape wall(Vector2f(64, 64));
+    wall.setTexture(&TextureWall);
+    wall.setPosition(500, 500);
+
+    walls.push_back(wall);
+
 
 
     //хз
@@ -86,7 +103,16 @@ int main()
 
         //Render
         window.clear();
+
+
         window.draw(player);
+
+        for (auto & i : walls)
+        {
+            window.draw(i);
+        }
+
+
         window.display();
     }
 
