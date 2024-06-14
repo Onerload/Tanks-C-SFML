@@ -4,69 +4,102 @@
 using namespace sf;
 
 int main()
-{
-    //tank
-    Vector2f posPlayer;
-    Vector2f moveRec;
-    Texture texplayer;
-    texplayer.loadFromFile("Images/tank1.png");
-    RectangleShape player(Vector2f(52, 52));
-    player.setTexture(&texplayer);
-    player.setPosition(0, 0);
-    RenderWindow window(VideoMode(900, 900), "Tanks");
+{   
+
+    //window
+    const unsigned WINDOW_WIDTH = 900;
+    const unsigned WINDOW_HEIGHT = 900;
+    RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tanks");
+    window.setFramerateLimit(120);
+
 
     //icone
     Image icon;
     icon.loadFromFile("Images/icon.jpg");
     window.setIcon(300, 300, icon.getPixelsPtr());
 
-    Clock clock;
-    float time, timePlayer;
 
-   
+    //хз, переменные мб
+    float dt;
+    Clock dt_clock;
+    Texture TexturePlayer;
+
+
+    //player
+    const float movementSpeed = 100.f;
+    Vector2f velocity;
+    TexturePlayer.loadFromFile("Images/tank1.png");
+    RectangleShape player(Vector2f(52, 52));
+    player.setTexture(&TexturePlayer);
+
+
+    //хз
     while (window.isOpen())
     {
+        dt = dt_clock.restart().asSeconds();
+
         Event event;
-        time = clock.getElapsedTime().asMicroseconds();
-        timePlayer = time / 60000;
-        clock.restart();
         while (window.pollEvent(event))
         {
             if (event.type == Event::Closed)
                 window.close();
-            switch (event.type)
-            {
-            case Event::KeyPressed:
-                if (event.key.code == Keyboard::W) moveRec.y = -timePlayer;
-                if (event.key.code == Keyboard::S) moveRec.y = timePlayer;
-                if (event.key.code == Keyboard::A) moveRec.x = -timePlayer;
-                if (event.key.code == Keyboard::D) moveRec.x = timePlayer;
-                break;
-            case Event::KeyReleased:
-                if (event.key.code == Keyboard::W) moveRec.y = 0;
-                if (event.key.code == Keyboard::S) moveRec.y = 0;
-                if (event.key.code == Keyboard::A) moveRec.x = 0;
-                if (event.key.code == Keyboard::D) moveRec.x = 0;
-
-            default:
-                break;
-            }
+           
         }
-        player.move(moveRec);
-        posPlayer = player.getPosition();
-        if (posPlayer.x > 848) player.setPosition(848, posPlayer.y);
-        if (posPlayer.x < 0) player.setPosition(50, posPlayer.y);
-        if (posPlayer.y > 848) player.setPosition(posPlayer.x, 848);
-        if (posPlayer.y < 0) player.setPosition(posPlayer.x, 0);
+        
+        //Player movement
+        velocity.y = 0.f;
+        velocity.x = 0.f;
+        if (Keyboard::isKeyPressed(Keyboard::W))
+        {
+            velocity.y += -movementSpeed * dt;
+        }
+        if (Keyboard::isKeyPressed(Keyboard::S))
+        {
+            velocity.y += movementSpeed * dt;
+        }
+        if (Keyboard::isKeyPressed(Keyboard::A))
+        {
+            velocity.x += -movementSpeed * dt;
+        }
+        if (Keyboard::isKeyPressed(Keyboard::D))
+        {
+            velocity.x += movementSpeed * dt;
+        }
 
-        if ((posPlayer.x > 848) && (posPlayer.y > 848)) player.setPosition(848, 848);
-        if ((posPlayer.x > 848) && (posPlayer.y < 50)) player.setPosition(848, 50);
-        if ((posPlayer.x < 0) && (posPlayer.y > 848)) player.setPosition(0, 848);
-        if ((posPlayer.x < 0) && (posPlayer.y < 50)) player.setPosition(0, 0);
+        player.move(velocity);
+
+
+        //Collision screen
+        //Left collision
+        if (player.getPosition().x < 0.f)
+            player.setPosition(0.f, player.getPosition().y);
+        //Top collosoin
+        if (player.getPosition().y < 0.f)
+            player.setPosition(player.getPosition().x, 0.f);
+        //Right collision 
+        if (player.getPosition().x + player.getGlobalBounds().width > WINDOW_WIDTH)
+            player.setPosition(WINDOW_WIDTH - player.getGlobalBounds().width, player.getPosition().y);
+        //Bottom collision 
+        if (player.getPosition().y + player.getGlobalBounds().height > WINDOW_WIDTH)
+            player.setPosition(player.getPosition().x, WINDOW_HEIGHT - player.getGlobalBounds().height);
+
+
+        //Render
         window.clear();
         window.draw(player);
         window.display();
     }
 
-    return 0;
+
+
+
+
+
+
+
+
+
+
+
+
 }
