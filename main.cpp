@@ -1,4 +1,6 @@
 ﻿#include <SFML/Graphics.hpp>
+#include <iostream>
+#include "Animation.h"
 
 
 using namespace sf;
@@ -39,6 +41,13 @@ int main()
     player.setTexture(&TexturePlayer);
 
 
+    //Animation
+    Animation animation(&TexturePlayer, Vector2u(3, 9), 0.3f);
+    float CurrentFrame = 1;
+    float deltaTime = 0.0f;
+    Clock clock;
+
+
     //Walls
     //Wall
     std::vector<RectangleShape> walls;
@@ -57,6 +66,9 @@ int main()
     //хз
     while (window.isOpen())
     {
+        deltaTime = clock.restart().asSeconds();
+
+
         dt = dt_clock.restart().asSeconds();
 
         Event event;
@@ -164,6 +176,12 @@ int main()
         //Bottom collision 
         if (player.getPosition().y + player.getGlobalBounds().height > WINDOW_WIDTH)
             player.setPosition(player.getPosition().x, WINDOW_HEIGHT - player.getGlobalBounds().height);
+
+
+
+        //Animation
+        animation.Update(1, deltaTime);
+        player.setTextureRect(animation.uvRect);
 
 
         //Render
