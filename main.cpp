@@ -11,7 +11,7 @@ int main()
     const unsigned WINDOW_WIDTH = 900;
     const unsigned WINDOW_HEIGHT = 900;
     RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tanks");
-    window.setFramerateLimit(120);
+    window.setFramerateLimit(10000000);
 
 
     //icone
@@ -26,6 +26,8 @@ int main()
     Texture TexturePlayer;
     Texture TextureWall;
     Texture Walls;
+
+    const float gridSixe = 50.f;
 
 
     //player
@@ -48,7 +50,12 @@ int main()
 
     walls.push_back(wall);
 
-
+    //Collision
+    FloatRect nextPos;
+    RectangleShape nextBox;
+    nextBox.setSize(Vector2f(gridSixe, gridSixe));
+    nextBox.setFillColor(Color::Transparent);
+    nextBox.setOutlineThickness(1.f);
 
     //хз
     while (window.isOpen())
@@ -83,7 +90,24 @@ int main()
             velocity.x += movementSpeed * dt;
         }
 
-        player.move(velocity);
+        //Collision 
+        for (auto& wall : walls)
+        {
+            FloatRect playerBounds = player.getGlobalBounds();
+            FloatRect wallBounds = wall.getGlobalBounds();
+
+            nextPos = playerBounds;
+            nextPos.left += velocity.x * 30;
+            nextPos.top += velocity.y * 30;
+            nextBox.setPosition(nextPos.left, nextPos.top);
+
+            if (wallBounds.intersects(nextPos))
+            {
+
+            }
+        }
+
+        player.move(velocity); 
 
 
         //Collision screen
@@ -111,7 +135,8 @@ int main()
         {
             window.draw(i);
         }
-
+        
+        window.draw(nextBox);
 
         window.display();
     }
