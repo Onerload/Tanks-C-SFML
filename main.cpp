@@ -52,10 +52,7 @@ int main()
 
     //Collision
     FloatRect nextPos;
-    RectangleShape nextBox;
-    nextBox.setSize(Vector2f(gridSixe, gridSixe));
-    nextBox.setFillColor(Color::Transparent);
-    nextBox.setOutlineThickness(1.f);
+    
 
     //хз
     while (window.isOpen())
@@ -97,14 +94,58 @@ int main()
             FloatRect wallBounds = wall.getGlobalBounds();
 
             nextPos = playerBounds;
-            nextPos.left += velocity.x * 30;
-            nextPos.top += velocity.y * 30;
-            nextBox.setPosition(nextPos.left, nextPos.top);
+            nextPos.left += velocity.x;
+            nextPos.top += velocity.y ;
+               
+                if (wallBounds.intersects(nextPos))
+                if (wallBounds.intersects(nextPos))
+                {
+                    //Bottom collision
+                    if (playerBounds.top < wallBounds.top
+                        && playerBounds.top + playerBounds.height < wallBounds.top + wallBounds.height
+                        && playerBounds.left < wallBounds.left + wallBounds.width
+                        && playerBounds.left + playerBounds.width > wallBounds.left)
+                    {
+                        velocity.y = 0.f;
+                        player.setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
 
-            if (wallBounds.intersects(nextPos))
-            {
+                    }
 
-            }
+
+                    //Top collision
+                    else if (playerBounds.top > wallBounds.top
+                        && playerBounds.top + playerBounds.height > wallBounds.top + wallBounds.height
+                        && playerBounds.left < wallBounds.left + wallBounds.width
+                        && playerBounds.left + playerBounds.width > wallBounds.left)
+                    {
+                        velocity.y = 0.f;
+                        player.setPosition(playerBounds.left, wallBounds.top + wallBounds.height);
+
+                    }
+
+
+                    //Right collision
+                    if (playerBounds.left < wallBounds.left
+                        && playerBounds.left + playerBounds.width < wallBounds.left + wallBounds.width
+                        && playerBounds.top < wallBounds.top + wallBounds.height
+                        && playerBounds.top + playerBounds.height > wallBounds.top)
+                    {
+                        velocity.x = 0.f;
+                        player.setPosition(wallBounds.left - playerBounds.width, playerBounds.top);
+                              
+                    }
+
+
+                    //Left collision
+                    else if (playerBounds.left > wallBounds.left
+                        && playerBounds.left + playerBounds.width > wallBounds.left + wallBounds.width
+                        && playerBounds.top < wallBounds.top + wallBounds.height
+                        && playerBounds.top + playerBounds.height > wallBounds.top)
+                    {
+                        velocity.x = 0.f;
+                        player.setPosition(wallBounds.left + wallBounds.width, playerBounds.top);
+                    }
+                }
         }
 
         player.move(velocity); 
@@ -136,7 +177,7 @@ int main()
             window.draw(i);
         }
         
-        window.draw(nextBox);
+        
 
         window.display();
     }
