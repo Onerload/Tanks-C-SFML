@@ -150,6 +150,13 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\icon.jpg" />
+    <Image Include="Images\sprite.png" />
+    <Image Include="Images\Tank.png" />
+    <Image Include="Images\tank1.png" />
+    <Image Include="Images\texture.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

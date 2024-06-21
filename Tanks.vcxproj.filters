@@ -40,4 +40,21 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\Tank.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Images\icon.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Images\sprite.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Images\tank1.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Images\texture.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

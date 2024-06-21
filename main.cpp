@@ -4,69 +4,56 @@
 
 
 using namespace sf;
-
-
 int main()
-{   
-
+{
     //window
     const unsigned WINDOW_WIDTH = 900;
     const unsigned WINDOW_HEIGHT = 900;
     RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tanks");
-    window.setFramerateLimit(10000000);
-
-
+    window.setFramerateLimit(120);
     //icone
     Image icon;
     icon.loadFromFile("Images/icon.jpg");
     window.setIcon(300, 300, icon.getPixelsPtr());
-
-
     //хз, переменные мб
     float dt;
     Clock dt_clock;
     Texture TexturePlayer;
     Texture TextureWall;
     Texture Walls;
-
     const float gridSixe = 50.f;
-
-
     //player
     const float movementSpeed = 100.f;
     Vector2f velocity;
 
-    TexturePlayer.loadFromFile("Images/tank1.png");
-    RectangleShape player(Vector2f(52, 52));
-    player.setTexture(&TexturePlayer);
 
+    Image playerImage;
+    playerImage.loadFromFile("Images/Tank.png");
+    TexturePlayer.loadFromImage(playerImage);
+    Sprite player;
+    player.setTexture(TexturePlayer);
+    player.setTextureRect(IntRect(0, 0, 52, 52));
 
-    //Animation
-    Animation animation(&TexturePlayer, Vector2u(3, 9), 0.3f);
-    float CurrentFrame = 1;
-    float deltaTime = 0.0f;
-    Clock clock;
 
 
     //Walls
     //Wall
     std::vector<RectangleShape> walls;
-
     TextureWall.loadFromFile("Images/texture.png");
     RectangleShape wall(Vector2f(64, 64));
     wall.setTexture(&TextureWall);
     wall.setPosition(500, 500);
-
     walls.push_back(wall);
-
     //Collision
     FloatRect nextPos;
-    
+
+
+
+    float CurrentFrame = 0;
 
     //хз
     while (window.isOpen())
     {
-        deltaTime = clock.restart().asSeconds();
 
 
         dt = dt_clock.restart().asSeconds();
@@ -76,40 +63,42 @@ int main()
         {
             if (event.type == Event::Closed)
                 window.close();
-           
+
         }
-        
+
         //Player movement
         velocity.y = 0.f;
         velocity.x = 0.f;
         if (Keyboard::isKeyPressed(Keyboard::W))
         {
             velocity.y += -movementSpeed * dt;
+            player.setTextureRect(IntRect(0, 0, 52, 52));
         }
         if (Keyboard::isKeyPressed(Keyboard::S))
         {
             velocity.y += movementSpeed * dt;
+            player.setTextureRect(IntRect(0, 104, 52, 52));
         }
         if (Keyboard::isKeyPressed(Keyboard::A))
         {
             velocity.x += -movementSpeed * dt;
+            player.setTextureRect(IntRect(0, 52, 52, 52));
         }
         if (Keyboard::isKeyPressed(Keyboard::D))
         {
             velocity.x += movementSpeed * dt;
+            player.setTextureRect(IntRect(0, 156, 52, 52));
         }
-
         //Collision 
         for (auto& wall : walls)
         {
             FloatRect playerBounds = player.getGlobalBounds();
             FloatRect wallBounds = wall.getGlobalBounds();
-
             nextPos = playerBounds;
             nextPos.left += velocity.x;
-            nextPos.top += velocity.y ;
-               
-                if (wallBounds.intersects(nextPos))
+            nextPos.top += velocity.y;
+
+            if (wallBounds.intersects(nextPos))
                 if (wallBounds.intersects(nextPos))
                 {
                     //Bottom collision
@@ -120,10 +109,7 @@ int main()
                     {
                         velocity.y = 0.f;
                         player.setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
-
                     }
-
-
                     //Top collision
                     else if (playerBounds.top > wallBounds.top
                         && playerBounds.top + playerBounds.height > wallBounds.top + wallBounds.height
@@ -132,10 +118,7 @@ int main()
                     {
                         velocity.y = 0.f;
                         player.setPosition(playerBounds.left, wallBounds.top + wallBounds.height);
-
                     }
-
-
                     //Right collision
                     if (playerBounds.left < wallBounds.left
                         && playerBounds.left + playerBounds.width < wallBounds.left + wallBounds.width
@@ -144,10 +127,8 @@ int main()
                     {
                         velocity.x = 0.f;
                         player.setPosition(wallBounds.left - playerBounds.width, playerBounds.top);
-                              
+
                     }
-
-
                     //Left collision
                     else if (playerBounds.left > wallBounds.left
                         && playerBounds.left + playerBounds.width > wallBounds.left + wallBounds.width
@@ -159,10 +140,7 @@ int main()
                     }
                 }
         }
-
-        player.move(velocity); 
-
-
+        player.move(velocity);
         //Collision screen
         //Left collision
         if (player.getPosition().x < 0.f)
@@ -179,37 +157,16 @@ int main()
 
 
 
-        //Animation
-        animation.Update(1, deltaTime);
-        player.setTextureRect(animation.uvRect);
-
-
         //Render
         window.clear();
 
-
         window.draw(player);
-
-        for (auto & i : walls)
+        for (auto& i : walls)
         {
             window.draw(i);
         }
-        
-        
+
 
         window.display();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
