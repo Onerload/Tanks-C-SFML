@@ -1,7 +1,7 @@
 ﻿  main.cpp
 D:\Проекты\Tanks\main.cpp(40,16): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
-D:\Проекты\Tanks\main.cpp(82,35): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-D:\Проекты\Tanks\main.cpp(90,35): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-D:\Проекты\Tanks\main.cpp(98,35): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-D:\Проекты\Tanks\main.cpp(106,35): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+D:\Проекты\Tanks\main.cpp(83,35): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+D:\Проекты\Tanks\main.cpp(91,35): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+D:\Проекты\Tanks\main.cpp(99,35): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+D:\Проекты\Tanks\main.cpp(107,35): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
   Tanks.vcxproj -> D:\Проекты\Tanks\x64\Debug\Tanks.exe

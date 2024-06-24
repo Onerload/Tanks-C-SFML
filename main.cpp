@@ -77,7 +77,8 @@ int main()
         velocity.x = 0.f;
         if (Keyboard::isKeyPressed(Keyboard::W))
         {
-            velocity.y += -movementSpeed * dt;
+           
+        for (auto& wall : walls) velocity.y += -movementSpeed * dt;
             player.setTextureRect(IntRect(0, 0, 52, 52));
             CurrentFrame += 0.005 * time;
             if (CurrentFrame > 2) CurrentFrame -= 2;
@@ -108,7 +109,6 @@ int main()
             player.setTextureRect(IntRect(52 * int(CurrentFrame), 156, 52, 52));
         }
         //Collision 
-        for (auto& wall : walls)
         {
             FloatRect playerBounds = player.getGlobalBounds();
             FloatRect wallBounds = wall.getGlobalBounds();
