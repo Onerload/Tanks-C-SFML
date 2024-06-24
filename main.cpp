@@ -1,6 +1,6 @@
 ﻿#include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Animation.h"
+
 
 
 using namespace sf;
@@ -22,6 +22,8 @@ int main()
     Texture TextureWall;
     Texture Walls;
     const float gridSixe = 50.f;
+
+
     //player
     const float movementSpeed = 100.f;
     Vector2f velocity;
@@ -34,6 +36,10 @@ int main()
     player.setTexture(TexturePlayer);
     player.setTextureRect(IntRect(0, 0, 52, 52));
 
+
+    float time = dt_clock.getElapsedTime().asMicroseconds();
+    dt_clock.restart();
+    time = time / 800;
 
 
     //Walls
@@ -73,21 +79,33 @@ int main()
         {
             velocity.y += -movementSpeed * dt;
             player.setTextureRect(IntRect(0, 0, 52, 52));
+            CurrentFrame += 0.005 * time;
+            if (CurrentFrame > 2) CurrentFrame -= 2;
+            player.setTextureRect(IntRect(52 * int(CurrentFrame), 0, 52, 52));
         }
         if (Keyboard::isKeyPressed(Keyboard::S))
         {
             velocity.y += movementSpeed * dt;
             player.setTextureRect(IntRect(0, 104, 52, 52));
+            CurrentFrame += 0.005 * time;
+            if (CurrentFrame > 2) CurrentFrame -= 2;
+            player.setTextureRect(IntRect(52 * int(CurrentFrame), 104, 52, 52));
         }
         if (Keyboard::isKeyPressed(Keyboard::A))
         {
             velocity.x += -movementSpeed * dt;
             player.setTextureRect(IntRect(0, 52, 52, 52));
+            CurrentFrame += 0.005 * time;
+            if (CurrentFrame > 2) CurrentFrame -= 2;
+            player.setTextureRect(IntRect(52 * int(CurrentFrame), 52, 52, 52));
         }
         if (Keyboard::isKeyPressed(Keyboard::D))
         {
             velocity.x += movementSpeed * dt;
             player.setTextureRect(IntRect(0, 156, 52, 52));
+            CurrentFrame += 0.005 * time;
+            if (CurrentFrame > 2) CurrentFrame -= 2;
+            player.setTextureRect(IntRect(52 * int(CurrentFrame), 156, 52, 52));
         }
         //Collision 
         for (auto& wall : walls)
@@ -158,6 +176,10 @@ int main()
 
 
         //Render
+
+      
+       
+
         window.clear();
 
         window.draw(player);

@@ -18,9 +18,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sfml-window-d-2.dll" />
@@ -34,11 +31,6 @@
     <None Include="sfml-system-2.dll" />
     <None Include="sfml-system-d-2.dll" />
     <None Include="sfml-window-2.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Animation.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\Tank.png">

@@ -131,7 +131,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -146,9 +145,6 @@
     <None Include="sfml-system-d-2.dll" />
     <None Include="sfml-window-2.dll" />
     <None Include="sfml-window-d-2.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Animation.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\icon.jpg" />
