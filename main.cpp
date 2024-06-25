@@ -78,13 +78,13 @@ int main()
         if (Keyboard::isKeyPressed(Keyboard::W))
         {
            
-        for (auto& wall : walls) velocity.y += -movementSpeed * dt;
+            velocity.y += -movementSpeed * dt;
             player.setTextureRect(IntRect(0, 0, 52, 52));
             CurrentFrame += 0.005 * time;
             if (CurrentFrame > 2) CurrentFrame -= 2;
             player.setTextureRect(IntRect(52 * int(CurrentFrame), 0, 52, 52));
         }
-        if (Keyboard::isKeyPressed(Keyboard::S))
+        else if (Keyboard::isKeyPressed(Keyboard::S))
         {
             velocity.y += movementSpeed * dt;
             player.setTextureRect(IntRect(0, 104, 52, 52));
@@ -92,7 +92,7 @@ int main()
             if (CurrentFrame > 2) CurrentFrame -= 2;
             player.setTextureRect(IntRect(52 * int(CurrentFrame), 104, 52, 52));
         }
-        if (Keyboard::isKeyPressed(Keyboard::A))
+        else if (Keyboard::isKeyPressed(Keyboard::A))
         {
             velocity.x += -movementSpeed * dt;
             player.setTextureRect(IntRect(0, 52, 52, 52));
@@ -100,7 +100,7 @@ int main()
             if (CurrentFrame > 2) CurrentFrame -= 2;
             player.setTextureRect(IntRect(52 * int(CurrentFrame), 52, 52, 52));
         }
-        if (Keyboard::isKeyPressed(Keyboard::D))
+        else if (Keyboard::isKeyPressed(Keyboard::D))
         {
             velocity.x += movementSpeed * dt;
             player.setTextureRect(IntRect(0, 156, 52, 52));
